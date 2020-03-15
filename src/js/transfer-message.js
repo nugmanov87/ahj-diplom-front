@@ -13,7 +13,7 @@ export default class TransferMessage {
     this.url = `https://${urls}/`;
     this.crypton = new Crypton(crypton);
     this.lazyStart = true;
-   }
+  }
 
   async init() {
     this.elListMessages = document.querySelector('.display-legends');
