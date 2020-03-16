@@ -1,7 +1,7 @@
 import TransferMessage from './transfer-message.js';
 import Popup from './popup.js';
 import RecAV from './recAV.js';
-import getGEO from './getGEO.js';
+import getGeo from './getGeo.js';
 import Bot from './bot.js';
 
 const uuid = require('uuid');
@@ -122,7 +122,7 @@ elInput.addEventListener('keypress', (evt) => {
   if (evt.key === 'Enter') {
     evt.preventDefault();
 
-    const regExpBot = /^@chaos:/;
+    const regExpBot = /^terminator:/;
     if (elInput.value.search(regExpBot) !== -1) {
       funcBot.funcBot(elInput.value);
       elInput.value = '';
@@ -165,7 +165,7 @@ elPopupOk.addEventListener('click', () => {
 const elGEO = document.querySelector('.geo-teg');
 
 elGEO.addEventListener('click', async () => {
-  const GEOteg = await getGEO(popup);
+  const GEOteg = await getGeo(popup);
   elPopup.classList.add('hidden');
   console.log(GEOteg);
   const objMessage = {

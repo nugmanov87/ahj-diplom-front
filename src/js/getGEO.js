@@ -3,11 +3,11 @@ function callPopup(msg, popup) {
   popup.showPopup('get', title, msg);
 }
 
-export default function getGEO(popup) {
+export default function getGeo(popup) {
   console.log('getGeo');
-  const elPopupInput = document.querySelector('.popup-inp');
-  const elPopupCancel = document.querySelector('.popup-cancel');
-  const elPopupOk = document.querySelector('.popup-ok');
+  const popupInp = document.querySelector('.popup-inp');
+  const popupCancel = document.querySelector('.popup-cancel');
+  const popupOk = document.querySelector('.popup-ok');
 
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
@@ -17,15 +17,15 @@ export default function getGEO(popup) {
           resolve(`${latitude}, ${longitude}`);
         },
         (error) => {
-          const msg = 'К сожалению, нам не удалось определить ваше местоположение, пожалуйста, дайте разрешение на использование геолакации, либо введите координаты вручную. Введите Широту и долготу через запятую (55.0000, 37.0000)';
+          const msg = 'К сожалению, нам не удалось определить ваше местоположение, пожалуйста, дайте разрешение на использование геолокации, либо введите координаты вручную. Введите Широту и долготу через запятую (45.0000, 54.0000)';
           callPopup(msg, popup);
-          elPopupOk.addEventListener('click', () => {
+          popupOk.addEventListener('click', () => {
             console.log('GEO ok', error);
             if (popup.validate()) {
-              resolve(elPopupInput.value);
+              resolve(popupInp.value);
             }
           });
-          elPopupCancel.addEventListener('click', () => {
+          popupCancel.addEventListener('click', () => {
             reject('cancel'); // eslint-disable-line prefer-promise-reject-errors
           });
         },
@@ -34,13 +34,13 @@ export default function getGEO(popup) {
       const msg = 'Не поддерживает браузер. Введите широту и долготу через запятую';
       callPopup(msg, popup);
 
-      elPopupOk.addEventListener('click', () => {
+      popupOk.addEventListener('click', () => {
         console.log('GEO ok');
         if (popup.validate()) {
-          resolve(elPopupInput.value);
+          resolve(popupInp.value);
         }
       });
-      elPopupCancel.addEventListener('click', () => {
+      popupCancel.addEventListener('click', () => {
         reject('cancel'); // eslint-disable-line prefer-promise-reject-errors
       });
     }

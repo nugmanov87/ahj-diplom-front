@@ -1,4 +1,4 @@
-import Worker from './web-worker.js';
+import Worker from './webWorker.js';
 import PrintMessage from './print-message.js';
 import Crypton from './crypt.js';
 
@@ -45,7 +45,9 @@ export default class TransferMessage {
         inpMsg.msg = deCrypt;
         localArrMessages.push(inpMsg);
         this.printMsg.printMsg(inpMsg, 'end');
-        document.querySelector(`[data-id="${inpMsg.id}"]`).classList.remove('loaded');
+        document
+          .querySelector(`[data-id="${inpMsg.id}"]`)
+          .classList.remove('loaded');
       }
     });
 
@@ -102,7 +104,9 @@ export default class TransferMessage {
         if (event.data.msg && event.data.msg !== null) {
           localArrMessages.push(event.data);
           this.printMsg.printMsg(event.data, 'start');
-          document.querySelector(`[data-id="${event.data.id}"]`).classList.remove('loaded');
+          document
+            .querySelector(`[data-id="${event.data.id}"]`)
+            .classList.remove('loaded');
         }
         lengthDown -= 1;
         if (lengthDown === 0) {
@@ -139,7 +143,10 @@ export default class TransferMessage {
     const jsonStr = JSON.stringify(body);
 
     const element = document.createElement('a');
-    element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(jsonStr)}`);
+    element.setAttribute(
+      'href',
+      `data:text/plain;charset=utf-8,${encodeURIComponent(jsonStr)}`,
+    );
     element.setAttribute('download', filename);
     element.style.display = 'none';
     document.body.appendChild(element);

@@ -2,9 +2,9 @@ import validateGEO from './validateGEO.js';
 
 export default class Popup {
   init() {
-    this.elPopup = document.createElement('div');
-    this.elPopup.className = 'popup hidden';
-    this.elPopup.innerHTML = `
+    this.popup = document.createElement('div');
+    this.popup.className = 'popup hidden';
+    this.popup.innerHTML = `
     <p class="popup-header"></p>
     <p class="popup-msg"></p>
     <input type"text" class="popup-inp hidden">
@@ -13,30 +13,30 @@ export default class Popup {
       <div class="popup-ok button">OK</div>
     </div>
     `;
-    document.body.appendChild(this.elPopup);
+    document.body.appendChild(this.popup);
 
-    this.elPopupHeader = document.querySelector('.popup-header');
-    this.elPopupMsg = document.querySelector('.popup-msg');
-    this.elPopupInput = document.querySelector('.popup-inp');
-    this.btnCancel = document.querySelector('.popup-cancel');
+    this.popupHeader = document.querySelector('.popup-header');
+    this.popupMsg = document.querySelector('.popup-msg');
+    this.popupInp = document.querySelector('.popup-inp');
+    this.popupCancel = document.querySelector('.popup-cancel');
   }
 
   showPopup(type, header, msg) {
-    this.elPopup.classList.remove('hidden');
-    this.elPopupHeader.innerText = header;
-    this.elPopupMsg.innerText = msg;
+    this.popup.classList.remove('hidden');
+    this.popupHeader.innerText = header;
+    this.popupMsg.innerText = msg;
     if (type === 'get') {
-      this.elPopupInput.classList.remove('hidden');
-      this.btnCancel.classList.remove('hidden');
+      this.popupInp.classList.remove('hidden');
+      this.popupCancel.classList.remove('hidden');
     }
   }
 
   validate() {
-    if (validateGEO(this.elPopupInput.value)) {
-      this.elPopupInput.style.borderColor = '#000000';
+    if (validateGEO(this.popupInp.value)) {
+      this.popupInp.style.borderColor = '#000000';
       return true;
     }
-    this.elPopupInput.style.borderColor = '#ff0000';
+    this.popupInp.style.borderColor = '#ff0000';
     return false;
   }
 }
