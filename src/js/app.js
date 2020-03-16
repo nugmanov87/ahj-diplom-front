@@ -1,7 +1,7 @@
 import TransferMessage from './transfer-message.js';
 import Popup from './popup.js';
 import RecAV from './recAV.js';
-import getGeo from './getGeo.js';
+import getGEO from './getGEO.js';
 import Bot from './bot.js';
 
 const uuid = require('uuid');
@@ -29,7 +29,7 @@ submitName.addEventListener('click', async () => {
   // **************** rec AV *********************
   const recorder = new RecAV(popup, transferMsg);
   recorder.init();
-// **************** rec AV *********************
+  // **************** rec AV *********************
 });
 
 // **************** input file *********************
@@ -165,7 +165,7 @@ elPopupOk.addEventListener('click', () => {
 const elGEO = document.querySelector('.geo-teg');
 
 elGEO.addEventListener('click', async () => {
-  const GEOteg = await getGeo(popup);
+  const GEOteg = await getGEO(popup);
   elPopup.classList.add('hidden');
   console.log(GEOteg);
   const objMessage = {
@@ -182,6 +182,6 @@ elGEO.addEventListener('click', async () => {
 // **************** export *********************
 const elExport = document.querySelector('#export-history');
 
-elExport.addEventListener(('click'), async () => {
+elExport.addEventListener('click', async () => {
   transferMsg.exportHistory();
 });

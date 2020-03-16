@@ -3,8 +3,8 @@ function callPopup(msg, popup) {
   popup.showPopup('get', title, msg);
 }
 
-export default function getGeo(popup) {
-  console.log('getGeo');
+export default function getGEO(popup) {
+  console.log('getGEO');
   const popupInp = document.querySelector('.popup-inp');
   const popupCancel = document.querySelector('.popup-cancel');
   const popupOk = document.querySelector('.popup-ok');
