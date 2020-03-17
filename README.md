@@ -1,14 +1,15 @@
 # ahj-diplom
+
 https://nugmanov87.github.io/ahj-diplom-front/
 [![Build status](https://ci.appveyor.com/api/projects/status/uoyi31bw96b9lenk?svg=true)](https://ci.appveyor.com/project/nugmanov87/ahj-diplom-front)
 
 ## Реализованны функции
 
-###Обязательные
+Обязательные
 
 - Сохранение в истории ссылок и текстовых сообщений
 - Ссылки (то, что начинается с `http://` или `https://`) должны быть кликабельны и отображаться как ссылки
-  ![](https://github.com/aleks903/ahj-diplom/blob/master/imgs/tekst-ssilka.jpg)
+  ![](https://github.com/nugmanov87/ahj-diplom-front/tree/master/imgs/tekst-url.png)
 - Сохранение в истории изображений, видео и аудио (как файлов) - через Drag & Drop и через иконку загрузки (скрепка в большинстве мессенджеров)
   ![](https://github.com/aleks903/ahj-diplom/blob/master/imgs/input-img-drag.jpg)
 - Скачивание файлов (на компьютер пользователя)
