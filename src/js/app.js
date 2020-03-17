@@ -11,7 +11,7 @@ const popup = new Popup();
 popup.init();
 
 let transferMsg = {};
-const elWindowStart = document.querySelector('.window');
+const windowBegin = document.querySelector('.window');
 const elLegends = document.querySelector('.legends');
 const submitName = document.querySelector('#submit-name');
 const funcBot = new Bot(document.querySelector('.display-legends'));
@@ -25,7 +25,7 @@ submitName.addEventListener('click', async () => {
 
   inputName.value = '';
   elLegends.classList.remove('hidden');
-  elWindowStart.classList.add('hidden');
+  windowBegin.classList.add('hidden');
   // **************** rec AV *********************
   const recorder = new RecAV(popup, transferMsg);
   recorder.init();
@@ -57,40 +57,40 @@ function loadFile(file) {
 }
 
 // ***************************** add file ****************************
-const buttonSelectFile = document.querySelector('#button-select');
-const elSelectFile = document.querySelector('#drop-file');
+const buttonSelect = document.querySelector('#button-select');
+const dropFile = document.querySelector('#drop-file');
 const elFavorits = document.querySelector('#favorits');
 
 elAddFile.addEventListener('click', () => {
-  buttonSelectFile.value = null;
-  buttonSelectFile.dispatchEvent(new MouseEvent('click'));
+  buttonSelect.value = null;
+  buttonSelect.dispatchEvent(new MouseEvent('click'));
 });
 
-elSelectFile.addEventListener('dragover', (event) => {
-  event.preventDefault();
+dropFile.addEventListener('dragover', (e) => {
+  e.preventDefault();
 });
 
-elSelectFile.addEventListener('drop', (event) => {
-  event.preventDefault();
-  const files = Array.from(event.dataTransfer.files);
+dropFile.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const files = Array.from(e.dataTransfer.files);
   for (const item of files) {
     loadFile(item);
   }
 });
 
-buttonSelectFile.addEventListener('change', (event) => {
-  const files = Array.from(event.currentTarget.files);
+buttonSelect.addEventListener('change', (e) => {
+  const files = Array.from(e.currentTarget.files);
   loadFile(files[0]);
 });
 
-elSelectFile.addEventListener('scroll', (event) => {
-  if (event.target.scrollTop === 0) {
+dropFile.addEventListener('scroll', (e) => {
+  if (e.target.scrollTop === 0) {
     transferMsg.lazyLoad();
   }
 });
 
-elSelectFile.addEventListener('click', (event) => {
-  const itemEl = event.target;
+dropFile.addEventListener('click', (e) => {
+  const itemEl = e.target;
   if (itemEl.classList.contains('like')) {
     const parentEl = itemEl.closest('.item-message');
     if (itemEl.classList.contains('favorit')) {
