@@ -9,11 +9,11 @@ https://nugmanov87.github.io/ahj-diplom-front/
 
 - Сохранение в истории ссылок и текстовых сообщений
 - Ссылки (то, что начинается с `http://` или `https://`) должны быть кликабельны и отображаться как ссылки
-  ![](https://github.com/nugmanov87/ahj-diplom-front/tree/master/imgs/tekst-url.png)
+  ![](imgs\Screenshot_1.png)
 - Сохранение в истории изображений, видео и аудио (как файлов) - через Drag & Drop и через иконку загрузки (скрепка в большинстве мессенджеров)
-  ![](https://github.com/aleks903/ahj-diplom/blob/master/imgs/input-img-drag.jpg)
+  ![](https://github.com/nugmanov87/ahj-diplom-front/tree/master/imgs/tekst-url.png)
 - Скачивание файлов (на компьютер пользователя)
-  ![](https://github.com/aleks903/ahj-diplom/blob/master/imgs/input-img-screpka.jpg)
+  ![](imgs\Screenshot_2.png)
 - Ленивая подгрузка: сначала подгружаются последние 10 сообщений, при прокрутке вверх подгружаются следующие 10 и т.д.
 
 ###Дополнительные
