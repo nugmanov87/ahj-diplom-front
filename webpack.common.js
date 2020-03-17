@@ -1,31 +1,31 @@
-const path = require('path'); // Node.js модуль для разрешения путей файлов
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // устанавливается через npm
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const path = require("path"); // Node.js модуль для разрешения путей файлов
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // устанавливается через npm
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'app.bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "app.bundle.js"
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: "[name].css"
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
-      // favicon: './src/favicon.ico',
+      template: "./src/index.html",
+      filename: "./index.html"
     }),
     new CopyPlugin([
       {
-        from: './src/img/', to: 'img/',
+        from: "./src/img/",
+        to: "img/"
       }
-    ]),
+    ])
   ],
   devServer: {
-    port: 8080,
+    port: 8080
   },
   module: {
     rules: [
@@ -33,51 +33,37 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-        },
+          loader: "babel-loader"
+        }
       },
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader, 'css-loader',
-        ],
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
         test: /web-worker\.js$/,
-        use: { loader: 'worker-loader' }
+        use: { loader: "worker-loader" }
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: 'html-loader',
-          },
-        ],
+            loader: "html-loader"
+          }
+        ]
       },
       {
         test: /\.(png)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
               esModule: false,
-              name: 'img/[name].[ext]',
-            },
-          },
-        ],
-      },
-      // {
-      //   test: /\.(txt)$/,
-      //   use: [
-      //     {
-      //       loader: 'file-loader',
-      //       options: {
-      //         esModule: false,
-      //         name: '[name].[ext]',
-      //       },
-      //     },
-      //   ],
-      // },
-    ],
-  },
+              name: "img/[name].[ext]"
+            }
+          }
+        ]
+      }
+    ]
+  }
 };
