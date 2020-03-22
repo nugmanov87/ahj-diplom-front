@@ -19,15 +19,15 @@ function deCrypt(objMsg, crypton) {
   }
 }
 
-self.addEventListener('message', async (e) => {  // eslint-disable-line
+self.addEventListener('message', async (event) => { // eslint-disable-line
   let content = '';
-  if (e.data.workCrypt === 'enCrypt') {
-    content = await enCrypt(e.data.file, e.data.keyCrypt);
+  if (event.data.workCrypt === 'enCrypt') {
+    content = await enCrypt(event.data.file, event.data.keyCrypt);
     self.postMessage(content); // eslint-disable-line
-  } else if (e.data.workCrypt === 'deCrypt') {
-    for (const item of e.data.file) {
+  } else if (event.data.workCrypt === 'deCrypt') {
+    for (const item of event.data.file) {
       const inpMsg = JSON.parse(item);
-      content = deCrypt(inpMsg.msg, e.data.keyCrypt);
+      content = deCrypt(inpMsg.msg, event.data.keyCrypt);
       inpMsg.msg = content;
       self.postMessage(inpMsg); // eslint-disable-line
     }

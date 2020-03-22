@@ -1,9 +1,9 @@
-import Worker from './webWorker.js';
-import PrintMessage from './printMessage.js';
+import Worker from './web-worker.js';
+import PrintMessage from './print-message.js';
 import Crypton from './crypt.js';
 
 const localArrMessages = [];
-const urls = 'https://ahj-diplom-server.herokuapp.com/';
+const urls = 'ahj-diplom-server.herokuapp.com';
 
 export default class TransferMessage {
   constructor(crypton) {
@@ -15,8 +15,8 @@ export default class TransferMessage {
   }
 
   async init() {
-    this.legends = document.querySelector('.display-legends');
-    this.printMsg = new PrintMessage(this.legends, this.crypton);
+    this.elListMessages = document.querySelector('.display-legends');
+    this.printMsg = new PrintMessage(this.elListMessages, this.crypton);
     this.initWS();
     const resp = await fetch(`${this.url}initmsg`);
     await resp.text();
