@@ -62,7 +62,7 @@ export default class Bot {
   funcBot(msg) {
     let msgHtml = '';
     let itemMsg = document.createElement('div');
-    itemMsg.className = 'item-message';
+    itemMsg.className = 'item-message no-favorit';
     itemMsg.innerHTML = `
     ${msg}
     <div class="footer-msg">
@@ -71,7 +71,7 @@ export default class Bot {
     `;
     this.parentEl.appendChild(itemMsg);
 
-    const question = msg.replace(/^terminator: /, '');
+    const question = msg.replace(/^neo: /, '');
 
     switch (question) {
       case 'погода':
@@ -90,12 +90,12 @@ export default class Bot {
         msgHtml = this.randomMsg(this.howTime);
         break;
       default:
-        msgHtml = 'К сожалению, на данный запрос я не могу дать ответ!';
+        msgHtml = 'Вы отправили пустое сообщение, либо ваш вопрос некорректен. Пожалуйста, уточните ваш вопрос.';
         break;
     }
 
     itemMsg = document.createElement('div');
-    itemMsg.className = 'item-message bot';
+    itemMsg.className = 'item-message no-favorit bot';
     itemMsg.innerHTML = `
     ${msgHtml}
     <div class="footer-msg">

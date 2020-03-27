@@ -15,6 +15,7 @@ export default class AVrec {
     this.bPlayTimer = document.querySelector('#timer');
     this.elStartRec = document.querySelector('.start-rec');
     this.elStopRec = document.querySelector('.stop-rec');
+    // const mVideo = document.querySelector('#video');
 
     this.bAudio.addEventListener('click', () => {
       this.elStartRec.classList.add('hidden');
@@ -54,6 +55,7 @@ export default class AVrec {
       });
 
       if (tVideo) {
+        // const mVideo = document.querySelector('#video');
         const mVideo = document.createElement('video');
         mVideo.controls = true;
         mVideo.muted = 'muted';
@@ -67,10 +69,11 @@ export default class AVrec {
       const chunks = [];
 
       recorder.start();
+      // console.log(recorder.state);
 
       recorder.addEventListener('start', () => {
         timers = setInterval(() => {
-          this.bPlayTimer.innerText = this.timer((timmm += 1));
+          this.bPlayTimer.innerText = this.timer(timmm += 1);
         }, 1000);
         console.log('recording started');
       });
@@ -90,6 +93,7 @@ export default class AVrec {
           const itemId = uuid.v4();
           const element = document.createElement(curMedia);
           console.log('recording stopped');
+          // const blob = new Blob(chunks, {type: 'audio/mpeg3'});
           const blob = new Blob(chunks, { type: `${curMedia}/mp4` });
 
           const fr = new FileReader();
@@ -105,9 +109,12 @@ export default class AVrec {
               pin: false,
               favorit: false,
               msg: fr.result,
+              // msg: dataFile,
               dateTime: new Date(),
             };
             this.transferMsg.sendMessage(objMessage);
+
+            // cmessageAddGeo.messageAddGEO(element.outerHTML, this.popup);
           };
         }
         if (tVideo) {
@@ -125,24 +132,26 @@ export default class AVrec {
 
       this.bPlayCancel.addEventListener('click', () => {
         recorder.stop();
+        // clearInterval(timers);
         stream.getTracks().forEach((track) => track.stop());
         SaveCancel = false;
       });
     } catch (e) {
+      // console.error(e);
       const title = 'Что-то пошло не так';
       const msg = 'Дайте разрешение на запись звука/видео в браузере';
+      // const msg = 'Запрошенное устройство не найдено!!!!';
       this.popup.showPopup('', title, msg);
       this.elStartRec.classList.remove('hidden');
       this.elStopRec.classList.add('hidden');
     }
   }
 
+
   timer(seconds) {
     const minuts = Math.floor(seconds / 60);
-    const second = seconds - minuts * 60;
+    const second = (seconds - (minuts * 60));
 
-    return `${minuts < 10 ? `0${minuts}` : minuts}:${
-      second < 10 ? `0${second}` : second
-    }`; // eslint-disable-line prefer-template
+    return `${minuts < 10 ? '0' + minuts : minuts}:${second < 10 ? '0' + second : second}`; // eslint-disable-line prefer-template
   }
 }
