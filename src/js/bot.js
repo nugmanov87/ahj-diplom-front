@@ -71,7 +71,7 @@ export default class Bot {
     `;
     this.parentEl.appendChild(itemMsg);
 
-    const question = msg.replace(/^neo: /, '');
+    const question = msg.replace(/^terminator: /, '');
 
     switch (question) {
       case 'погода':

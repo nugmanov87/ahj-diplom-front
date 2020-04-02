@@ -122,7 +122,7 @@ elInput.addEventListener('keypress', (evt) => {
   if (evt.key === 'Enter') {
     evt.preventDefault();
 
-    const regExpBot = /^neo: /;
+    const regExpBot = /^terminator: /;
     if (elInput.value.search(regExpBot) !== -1) {
       funcBot.funcBot(elInput.value);
       elInput.value = '';
