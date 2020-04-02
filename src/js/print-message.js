@@ -75,6 +75,10 @@ export default class PrintMessage {
       result = null;
     }
 
+    if (htmlMsg === 'terminator:') {
+      result = null;
+    }
+
     if (message.search(regExp) !== -1) {
       htmlMsg = message.replace(
         regExp,
