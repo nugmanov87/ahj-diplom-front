@@ -31,9 +31,9 @@ export default class AVrec {
   }
 
   async audioRecorder(tVideo = false) {
-    if (!navigator.mediaDevices) {
+    if (!window.MediaRecorder) {
       const title = 'Что-то пошло не так';
-      const msg = 'Браузер не поддерживает';
+      const msg = 'Дайте разрешение на запись звука в браузере';
       this.popup.showPopup('', title, msg);
       return;
     }
@@ -41,13 +41,6 @@ export default class AVrec {
       let SaveCancel = true;
       let timmm = 0;
       let timers = null;
-
-      if (!window.MediaRecorder) {
-        const title = 'Что-то пошло не так';
-        const msg = 'Дайте разрешение на запись звука в браузере';
-        this.popup.showPopup('', title, msg);
-        return;
-      }
 
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
@@ -73,7 +66,7 @@ export default class AVrec {
 
       recorder.addEventListener('start', () => {
         timers = setInterval(() => {
-          this.bPlayTimer.innerText = this.timer(timmm += 1);
+          this.bPlayTimer.innerText = this.timer((timmm += 1));
         }, 1000);
         console.log('recording started');
       });
@@ -147,11 +140,12 @@ export default class AVrec {
     }
   }
 
-
   timer(seconds) {
     const minuts = Math.floor(seconds / 60);
-    const second = (seconds - (minuts * 60));
+    const second = seconds - minuts * 60;
 
-    return `${minuts < 10 ? '0' + minuts : minuts}:${second < 10 ? '0' + second : second}`; // eslint-disable-line prefer-template
+    return `${minuts < 10 ? `0${minuts}` : minuts}:${
+      second < 10 ? `0${second}` : second
+    }`; // eslint-disable-line prefer-template
   }
 }
