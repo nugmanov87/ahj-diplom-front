@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+/* eslint-disable no-undef */
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 
@@ -71,7 +72,7 @@ export default class PrintMessage {
     let htmlMsg = message;
 
     if (htmlMsg === '') {
-      result = null; // eslint-disable  not defined  no-undef
+      result = null;
     }
 
     if (message.search(regExp) !== -1) {
