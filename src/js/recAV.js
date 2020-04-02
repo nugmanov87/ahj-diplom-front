@@ -35,6 +35,7 @@ export default class AVrec {
       const title = 'Что-то пошло не так';
       const msg = 'Браузер не поддерживает';
       this.popup.showPopup('', title, msg);
+      return;
     }
     try {
       let SaveCancel = true;
