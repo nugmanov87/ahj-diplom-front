@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
-import hljs from "highlight.js";
-import "highlight.js/styles/github.css";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 
 function convertDate(value) {
   const rValue = value < 10 ? `0${value}` : value;
@@ -27,19 +27,19 @@ export default class PrintMessage {
 
   printMsg(messageObj, insertPosition) {
     const itemMsg = messageObj.msg;
-    let msgHtml = "";
+    let msgHtml = '';
 
     switch (messageObj.type) {
-      case "textMsg":
+      case 'textMsg':
         msgHtml = this.printTextMsg(itemMsg);
         break;
-      case "image":
+      case 'image':
         msgHtml = this.printImg(itemMsg, messageObj.name);
         break;
-      case "video":
+      case 'video':
         msgHtml = this.printVideo(itemMsg, messageObj.name);
         break;
-      case "audio":
+      case 'audio':
         msgHtml = this.printAudio(itemMsg, messageObj.name);
         break;
       default:
@@ -47,17 +47,17 @@ export default class PrintMessage {
         break;
     }
 
-    const elItemMsg = document.createElement("div");
-    elItemMsg.className = "item-message loaded no-favorit";
+    const elItemMsg = document.createElement('div');
+    elItemMsg.className = 'item-message loaded no-favorit';
     elItemMsg.dataset.id = messageObj.id;
     elItemMsg.innerHTML = `
     ${msgHtml}
     <div class="footer-msg">
-      <div class="like av${messageObj.favorit ? " favorit" : ""}"></div>
+      <div class="like av${messageObj.favorit ? ' favorit' : ''}"></div>
       <div class="date-time">${printData(messageObj.dateTime)}</div>
     </div>
     `;
-    if (insertPosition === "end") {
+    if (insertPosition === 'end') {
       this.parentEl.appendChild(elItemMsg);
       this.parentEl.scrollTo(0, elItemMsg.offsetTop);
     } else {
@@ -70,8 +70,8 @@ export default class PrintMessage {
     const regExpCod = /```(.|\n)*?```/;
     let htmlMsg = message;
 
-    if (htmlMsg === "") {
-      result = null;
+    if (htmlMsg === '') {
+      result = null; // eslint-disable  not defined  no-undef
     }
 
     if (message.search(regExp) !== -1) {
@@ -79,18 +79,18 @@ export default class PrintMessage {
         regExp,
         `
       <a href="${message.match(regExp)[0]}">${message.match(regExp)[0]}</a>
-    `
+    `,
       );
     }
 
     if (message.search(regExpCod) !== -1) {
-      const textCode = message.match(regExpCod)[0].replace(/```\n?/g, "");
+      const textCode = message.match(regExpCod)[0].replace(/```\n?/g, '');
       const highlightedCode = hljs.highlightAuto(textCode.trim()).value;
       htmlMsg = message.replace(
         regExpCod,
         `
       <pre><code>${highlightedCode}</code></pre>
-      `
+      `,
       );
     }
     return `
