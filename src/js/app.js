@@ -118,6 +118,16 @@ elFavorits.addEventListener('click', () => {
 // **************** input text *********************
 const elInput = document.querySelector('#el-input');
 
+// elInput.addEventListener('dblclick', (evt) => { elInput.value = elInput.Text; });
+
+elInput.addEventListener('dblclick', async () => {
+  elInput.value = await navigator.clipboard.readText();
+});
+
+elInput.addEventListener('click', () => {
+  document.execCommand('paste');
+});
+
 elInput.addEventListener('keypress', (evt) => {
   if (evt.key === 'Enter') {
     evt.preventDefault();
