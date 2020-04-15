@@ -1,31 +1,31 @@
-import TransferMessage from './transfer-message.js';
-import Popup from './popup.js';
-import RecAV from './recAV.js';
-import getGEO from './getGEO.js';
-import Bot from './bot.js';
+import TransferMessage from "./transfer-message.js";
+import Popup from "./popup.js";
+import RecAV from "./recAV.js";
+import getGEO from "./getGEO.js";
+import Bot from "./bot.js";
 
-const uuid = require('uuid');
+const uuid = require("uuid");
 
-const elAddFile = document.querySelector('.add-file');
+const elAddFile = document.querySelector(".add-file");
 const popup = new Popup();
 popup.init();
 
 let transferMsg = {};
-const elWindowStart = document.querySelector('.window');
-const elLegends = document.querySelector('.legends');
-const submitName = document.querySelector('#submit-name');
-const funcBot = new Bot(document.querySelector('.display-legends'));
+const elWindowStart = document.querySelector(".window");
+const elLegends = document.querySelector(".legends");
+const submitName = document.querySelector("#submit-name");
+const funcBot = new Bot(document.querySelector(".display-legends"));
 
-submitName.addEventListener('click', async () => {
-  const inputName = document.querySelector('#inp-name');
+submitName.addEventListener("click", async () => {
+  const inputName = document.querySelector("#inp-name");
   const keyCrypt = inputName.value;
 
   transferMsg = new TransferMessage(keyCrypt);
   transferMsg.init();
 
-  inputName.value = '';
-  elLegends.classList.remove('hidden');
-  elWindowStart.classList.add('hidden');
+  inputName.value = "";
+  elLegends.classList.remove("hidden");
+  elWindowStart.classList.add("hidden");
   // **************** rec AV *********************
   const recorder = new RecAV(popup, transferMsg);
   recorder.init();
@@ -57,20 +57,20 @@ function loadFile(file) {
 }
 
 // ***************************** add file ****************************
-const buttonSelectFile = document.querySelector('#button-select');
-const elSelectFile = document.querySelector('#drop-file');
-const elFavorits = document.querySelector('#favorits');
+const buttonSelectFile = document.querySelector("#button-select");
+const elSelectFile = document.querySelector("#drop-file");
+const elFavorits = document.querySelector("#favorits");
 
-elAddFile.addEventListener('click', () => {
+elAddFile.addEventListener("click", () => {
   buttonSelectFile.value = null;
-  buttonSelectFile.dispatchEvent(new MouseEvent('click'));
+  buttonSelectFile.dispatchEvent(new MouseEvent("click"));
 });
 
-elSelectFile.addEventListener('dragover', (event) => {
+elSelectFile.addEventListener("dragover", (event) => {
   event.preventDefault();
 });
 
-elSelectFile.addEventListener('drop', (event) => {
+elSelectFile.addEventListener("drop", (event) => {
   event.preventDefault();
   const files = Array.from(event.dataTransfer.files);
   for (const item of files) {
@@ -78,109 +78,99 @@ elSelectFile.addEventListener('drop', (event) => {
   }
 });
 
-buttonSelectFile.addEventListener('change', (event) => {
+buttonSelectFile.addEventListener("change", (event) => {
   const files = Array.from(event.currentTarget.files);
   loadFile(files[0]);
 });
 
-elSelectFile.addEventListener('scroll', (event) => {
+elSelectFile.addEventListener("scroll", (event) => {
   if (event.target.scrollTop === 0) {
     transferMsg.lazyLoad();
   }
 });
 
-elSelectFile.addEventListener('click', (event) => {
+elSelectFile.addEventListener("click", (event) => {
   const itemEl = event.target;
-  if (itemEl.classList.contains('like')) {
-    const parentEl = itemEl.closest('.item-message');
-    if (itemEl.classList.contains('favorit')) {
-      itemEl.classList.remove('favorit');
-      parentEl.classList.add('no-favorit');
+  if (itemEl.classList.contains("like")) {
+    const parentEl = itemEl.closest(".item-message");
+    if (itemEl.classList.contains("favorit")) {
+      itemEl.classList.remove("favorit");
+      parentEl.classList.add("no-favorit");
       transferMsg.changeFavorit(parentEl.dataset.id, false);
       return;
     }
-    itemEl.classList.add('favorit');
-    parentEl.classList.remove('no-favorit');
+    itemEl.classList.add("favorit");
+    parentEl.classList.remove("no-favorit");
     transferMsg.changeFavorit(parentEl.dataset.id, true);
   }
 });
 
-elFavorits.addEventListener('click', () => {
-  if (elFavorits.classList.contains('favorit')) {
-    elFavorits.classList.remove('favorit');
-    elFavorits.innerHTML = '';
+elFavorits.addEventListener("click", () => {
+  if (elFavorits.classList.contains("favorit")) {
+    elFavorits.classList.remove("favorit");
+    elFavorits.innerHTML = "";
     return;
   }
-  elFavorits.classList.add('favorit');
-  elFavorits.innerHTML = '<style>.no-favorit, .inputs {display: none;}</style>';
+  elFavorits.classList.add("favorit");
+  elFavorits.innerHTML = "<style>.no-favorit, .inputs {display: none;}</style>";
 });
 
 // **************** input text *********************
-const elInput = document.querySelector('#el-input');
+const elInput = document.querySelector("#el-input");
 
-// elInput.addEventListener('dblclick', (evt) => { elInput.value = elInput.Text; });
-
-elInput.addEventListener('dblclick', async () => {
-  elInput.value = await navigator.clipboard.readText();
-});
-
-elInput.addEventListener('click', () => {
-  document.execCommand('paste');
-});
-
-elInput.addEventListener('keypress', (evt) => {
-  if (evt.key === 'Enter') {
+elInput.addEventListener("keypress", (evt) => {
+  if ((evt.keyCode == 13 || evt.keyCode == 10) && evt.ctrlKey == true) {
     evt.preventDefault();
 
     const regExpBot = /^terminator: /;
     if (elInput.value.search(regExpBot) !== -1) {
       funcBot.funcBot(elInput.value);
-      elInput.value = '';
+      elInput.value = "";
       return;
     }
 
     const objMessage = {
       id: uuid.v4(),
-      type: 'textMsg',
+      type: "textMsg",
       pin: false,
       favorit: false,
       msg: elInput.value,
       dateTime: new Date(),
     };
     transferMsg.sendMessage(objMessage);
-    elInput.value = '';
+    elInput.value = "";
   }
 });
 
 // **************** rec AV *********************
-const elPopup = document.querySelector('.popup');
-const elPopupInput = document.querySelector('.popup-inp');
-const elPopupCancel = document.querySelector('.popup-cancel');
-const elPopupOk = document.querySelector('.popup-ok');
+const elPopup = document.querySelector(".popup");
+const elPopupInput = document.querySelector(".popup-inp");
+const elPopupCancel = document.querySelector(".popup-cancel");
+const elPopupOk = document.querySelector(".popup-ok");
 
 // popup cancel
-elPopupCancel.addEventListener('click', () => {
-  elPopup.classList.add('hidden');
+elPopupCancel.addEventListener("click", () => {
+  elPopup.classList.add("hidden");
   return false;
 });
 
 // popup OK
-elPopupOk.addEventListener('click', () => {
-  if (elPopupInput.classList.contains('hidden')) {
-    elPopup.classList.add('hidden');
+elPopupOk.addEventListener("click", () => {
+  if (elPopupInput.classList.contains("hidden")) {
+    elPopup.classList.add("hidden");
   }
 });
 
 // **************** GEO *********************
-const elGEO = document.querySelector('.geo-teg');
+const elGEO = document.querySelector(".geo-teg");
 
-elGEO.addEventListener('click', async () => {
+elGEO.addEventListener("click", async () => {
   const GEOteg = await getGEO(popup);
-  elPopup.classList.add('hidden');
+  elPopup.classList.add("hidden");
   console.log(GEOteg);
   const objMessage = {
     id: uuid.v4(),
-    type: 'textMsg',
+    type: "textMsg",
     pin: false,
     favorit: false,
     msg: GEOteg,
@@ -190,8 +180,8 @@ elGEO.addEventListener('click', async () => {
 });
 
 // **************** export *********************
-const elExport = document.querySelector('#export-history');
+const elExport = document.querySelector("#export-history");
 
-elExport.addEventListener('click', async () => {
+elExport.addEventListener("click", async () => {
   transferMsg.exportHistory();
 });
