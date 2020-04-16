@@ -35,8 +35,9 @@ export default class AVrec {
       const title = 'Что-то пошло не так';
       const msg = 'Браузер не поддерживает';
       this.popup.showPopup('', title, msg);
-      this.elStartRec.classList.remove('hidden');
-      this.elStopRec.classList.add('hidden');
+      this.elStartRec.classList.remove('display: none');
+      this.elStopRec.classList.add('display: none');
+      return;
     }
     try {
       let SaveCancel = true;
