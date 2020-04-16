@@ -35,8 +35,8 @@ export default class AVrec {
       const title = 'Что-то пошло не так';
       const msg = 'Браузер не поддерживает';
       this.popup.showPopup('', title, msg);
-      this.elStartRec.classList.remove('display: none');
-      this.elStopRec.classList.add('display: none');
+      this.elStartRec.classList.remove('hidden');
+      this.elStopRec.classList.add('hidden');
       return;
     }
     try {
@@ -75,7 +75,7 @@ export default class AVrec {
 
       recorder.addEventListener('start', () => {
         timers = setInterval(() => {
-          this.bPlayTimer.innerText = this.timer(timmm += 1);
+          this.bPlayTimer.innerText = this.timer((timmm += 1));
         }, 1000);
         console.log('recording started');
       });
@@ -144,16 +144,17 @@ export default class AVrec {
       const msg = 'Дайте разрешение на запись звука/видео в браузере';
       // const msg = 'Запрошенное устройство не найдено!!!!';
       this.popup.showPopup('', title, msg);
-      this.elStartRec.classList.remove('hidden');
       this.elStopRec.classList.add('hidden');
+      this.elStartRec.classList.remove('hidden');
     }
   }
 
-
   timer(seconds) {
     const minuts = Math.floor(seconds / 60);
-    const second = (seconds - (minuts * 60));
+    const second = seconds - minuts * 60;
 
-    return `${minuts < 10 ? '0' + minuts : minuts}:${second < 10 ? '0' + second : second}`; // eslint-disable-line prefer-template
+    return `${minuts < 10 ? `0${minuts}` : minuts}:${
+      second < 10 ? `0${second}` : second
+    }`; // eslint-disable-line prefer-template
   }
 }
