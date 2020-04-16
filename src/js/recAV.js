@@ -144,8 +144,8 @@ export default class AVrec {
       const msg = 'Дайте разрешение на запись звука/видео в браузере';
       // const msg = 'Запрошенное устройство не найдено!!!!';
       this.popup.showPopup('', title, msg);
-      this.elStopRec.classList.add('hidden');
-      this.elStartRec.classList.remove('hidden');
+      this.elStopRec.style.display = 'none';
+      this.elStartRec.classList.add('hidden');
     }
   }
 
