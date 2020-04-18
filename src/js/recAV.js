@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-const uuid = require('uuid');
+const uuid = require("uuid");
 
 export default class AVrec {
   constructor(popup, transferMsg) {
@@ -8,35 +8,35 @@ export default class AVrec {
   }
 
   init() {
-    this.bAudio = document.querySelector('#audio');
-    this.bVideo = document.querySelector('#video');
-    this.bPlayOk = document.querySelector('#play-ok');
-    this.bPlayCancel = document.querySelector('#play-cancel');
-    this.bPlayTimer = document.querySelector('#timer');
-    this.elStartRec = document.querySelector('.start-rec');
-    this.elStopRec = document.querySelector('.stop-rec');
-    // const mVideo = document.querySelector('#video');
+    this.bAudio = document.querySelector("#audio");
+    this.bVideo = document.querySelector("#video");
+    this.bPlayOk = document.querySelector("#play-ok");
+    this.bPlayCancel = document.querySelector("#play-cancel");
+    this.bPlayTimer = document.querySelector("#timer");
+    this.elStartRec = document.querySelector(".start-rec");
+    this.elStopRec = document.querySelector(".stop-rec");
+    this.elButtonAv = document.querySelector(".button-av");
 
-    this.bAudio.addEventListener('click', () => {
-      this.elStartRec.classList.add('hidden');
-      this.elStopRec.classList.remove('hidden');
+    this.bAudio.addEventListener("click", () => {
+      this.elStartRec.classList.add("hidden");
+      this.elStopRec.classList.remove("hidden");
       this.audioRecorder();
     });
 
-    this.bVideo.addEventListener('click', () => {
-      this.elStartRec.classList.add('hidden');
-      this.elStopRec.classList.remove('hidden');
+    this.bVideo.addEventListener("click", () => {
+      this.elStartRec.classList.add("hidden");
+      this.elStopRec.classList.remove("hidden");
       this.audioRecorder(true);
     });
   }
 
   async audioRecorder(tVideo = false) {
     if (!navigator.mediaDevices) {
-      const title = 'Что-то пошло не так';
-      const msg = 'Браузер не поддерживает';
-      this.popup.showPopup('', title, msg);
-      this.elStartRec.classList.remove('hidden');
-      this.elStopRec.classList.add('hidden');
+      const title = "Что-то пошло не так";
+      const msg = "Браузер не поддерживает";
+      this.popup.showPopup("", title, msg);
+      this.elStartRec.classList.remove("hidden");
+      this.elStopRec.classList.add("hidden");
       return;
     }
     try {
@@ -45,9 +45,9 @@ export default class AVrec {
       let timers = null;
 
       if (!window.MediaRecorder) {
-        const title = 'Что-то пошло не так';
-        const msg = 'Дайте разрешение на запись звука в браузере';
-        this.popup.showPopup('', title, msg);
+        const title = "Что-то пошло не так";
+        const msg = "Дайте разрешение на запись звука в браузере";
+        this.popup.showPopup("", title, msg);
         return;
       }
 
@@ -58,10 +58,10 @@ export default class AVrec {
 
       if (tVideo) {
         // const mVideo = document.querySelector('#video');
-        const mVideo = document.createElement('video');
+        const mVideo = document.createElement("video");
         mVideo.controls = true;
-        mVideo.muted = 'muted';
-        mVideo.className = 'mini-video';
+        mVideo.muted = "muted";
+        mVideo.className = "mini-video";
         document.body.appendChild(mVideo);
         mVideo.srcObject = stream;
         mVideo.play();
@@ -73,28 +73,28 @@ export default class AVrec {
       recorder.start();
       // console.log(recorder.state);
 
-      recorder.addEventListener('start', () => {
+      recorder.addEventListener("start", () => {
         timers = setInterval(() => {
           this.bPlayTimer.innerText = this.timer((timmm += 1));
         }, 1000);
-        console.log('recording started');
+        console.log("recording started");
       });
 
-      recorder.addEventListener('dataavailable', (evt) => {
+      recorder.addEventListener("dataavailable", (evt) => {
         chunks.push(evt.data);
       });
 
-      recorder.addEventListener('stop', async () => {
+      recorder.addEventListener("stop", async () => {
         clearInterval(timers);
-        this.bPlayTimer.innerText = '00:00';
+        this.bPlayTimer.innerText = "00:00";
         if (SaveCancel) {
-          let curMedia = 'audio';
+          let curMedia = "audio";
           if (tVideo) {
-            curMedia = 'video';
+            curMedia = "video";
           }
           const itemId = uuid.v4();
           const element = document.createElement(curMedia);
-          console.log('recording stopped');
+          console.log("recording stopped");
           // const blob = new Blob(chunks, {type: 'audio/mpeg3'});
           const blob = new Blob(chunks, { type: `${curMedia}/mp4` });
 
@@ -120,19 +120,19 @@ export default class AVrec {
           };
         }
         if (tVideo) {
-          document.body.removeChild(document.querySelector('.mini-video'));
+          document.body.removeChild(document.querySelector(".mini-video"));
         }
-        this.elStartRec.classList.remove('hidden');
-        this.elStopRec.classList.add('hidden');
+        this.elStartRec.classList.remove("hidden");
+        this.elStopRec.classList.add("hidden");
       });
 
-      this.bPlayOk.addEventListener('click', () => {
+      this.bPlayOk.addEventListener("click", () => {
         recorder.stop();
         stream.getTracks().forEach((track) => track.stop());
         SaveCancel = true;
       });
 
-      this.bPlayCancel.addEventListener('click', () => {
+      this.bPlayCancel.addEventListener("click", () => {
         recorder.stop();
         // clearInterval(timers);
         stream.getTracks().forEach((track) => track.stop());
@@ -140,12 +140,11 @@ export default class AVrec {
       });
     } catch (e) {
       // console.error(e);
-      const title = 'Что-то пошло не так';
-      const msg = 'Дайте разрешение на запись звука/видео в браузере';
+      const title = "Что-то пошло не так";
+      const msg = "Дайте разрешение на запись звука/видео в браузере";
       // const msg = 'Запрошенное устройство не найдено!!!!';
-      this.popup.showPopup('', title, msg);
-      this.elStopRec.style.display = 'none';
-      this.elStartRec.classList.add('hidden');
+      this.popup.showPopup("", title, msg);
+      this.elButtonAv.parentNode.removeChild(this.elButtonAv);
     }
   }
 
