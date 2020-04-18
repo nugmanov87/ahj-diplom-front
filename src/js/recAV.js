@@ -15,7 +15,7 @@ export default class AVrec {
     this.bPlayTimer = document.querySelector('#timer');
     this.elStartRec = document.querySelector('.start-rec');
     this.elStopRec = document.querySelector('.stop-rec');
-    this.elButtonAv = document.querySelector('.button-av');
+    // const mVideo = document.querySelector('#video');
 
     this.bAudio.addEventListener('click', () => {
       this.elStartRec.classList.add('hidden');
@@ -35,7 +35,7 @@ export default class AVrec {
       const title = 'Что-то пошло не так';
       const msg = 'Браузер не поддерживает';
       this.popup.showPopup('', title, msg);
-      this.elStartRec.classList.remove('hidden');
+      this.elStartRec.classList.add('hidden');
       this.elStopRec.classList.add('hidden');
       return;
     }
@@ -48,7 +48,8 @@ export default class AVrec {
         const title = 'Что-то пошло не так';
         const msg = 'Дайте разрешение на запись звука в браузере';
         this.popup.showPopup('', title, msg);
-        return;
+        this.elStopRec.classList.add('hidden');
+        this.elStartRec.classList.add('hidden');
       }
 
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -144,7 +145,8 @@ export default class AVrec {
       const msg = 'Дайте разрешение на запись звука/видео в браузере';
       // const msg = 'Запрошенное устройство не найдено!!!!';
       this.popup.showPopup('', title, msg);
-      this.elButtonAv.parentNode.removeChild(this.elButtonAv);
+      this.elStopRec.classList.add('hidden');
+      this.elStartRec.classList.add('hidden');
     }
   }
 
