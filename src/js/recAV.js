@@ -44,14 +44,6 @@ export default class AVrec {
       let timmm = 0;
       let timers = null;
 
-      if (!window.MediaRecorder) {
-        const title = 'Что-то пошло не так';
-        const msg = 'Дайте разрешение на запись звука в браузере';
-        this.popup.showPopup('', title, msg);
-        this.elStopRec.classList.add('hidden');
-        this.elStartRec.classList.add('hidden');
-      }
-
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
         video: tVideo,
@@ -141,7 +133,7 @@ export default class AVrec {
       });
     } catch (e) {
       // console.error(e);
-      const title = 'Что-то пошло не так';
+      const title = 'Что-то пошло не так...';
       const msg = 'Дайте разрешение на запись звука/видео в браузере';
       // const msg = 'Запрошенное устройство не найдено!!!!';
       this.popup.showPopup('', title, msg);
