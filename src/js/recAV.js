@@ -44,6 +44,15 @@ export default class AVrec {
       let timmm = 0;
       let timers = null;
 
+      if (!window.MediaRecorder) {
+        const title = 'Что-то пошло не так';
+        const msg = 'Дайте разрешение на запись звука в браузере';
+        this.popup.showPopup('', title, msg);
+        this.elStopRec.classList.add('hidden');
+        this.elStartRec.classList.add('hidden');
+        return;
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
         video: tVideo,
