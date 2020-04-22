@@ -3,7 +3,7 @@ function callPopup(msg, popup) {
   popup.showPopup('get', title, msg);
 }
 
-function getGEO(popup) {
+export default function getGEO(popup) {
   console.log('getGEO');
   const popupInp = document.querySelector('.popup-inp');
   const popupCancel = document.querySelector('.popup-cancel');
@@ -58,4 +58,4 @@ function validateGEO(coord) {
   return false;
 }
 
-export { getGEO, validateGEO };
+export { validateGEO };
