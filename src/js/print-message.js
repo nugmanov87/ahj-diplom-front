@@ -2,23 +2,7 @@
 /* eslint-disable no-undef */
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
-
-function convertDate(value) {
-  const rValue = value < 10 ? `0${value}` : value;
-  return rValue;
-}
-
-function printData(valueDate) {
-  const itemDate = new Date(valueDate);
-  const date = convertDate(itemDate.getDate());
-  const month = convertDate(itemDate.getMonth() + 1);
-  const year = convertDate(itemDate.getFullYear());
-  const hours = convertDate(itemDate.getHours());
-  const minut = convertDate(itemDate.getMinutes());
-  // const second = convertDate(itemDate.getSeconds());
-  const itemCreated = `${hours}:${minut} ${date}.${month}.${year}`;
-  return itemCreated;
-}
+import printData from './print-data.js';
 
 export default class PrintMessage {
   constructor(parentEl, crypton) {

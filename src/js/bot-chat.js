@@ -1,19 +1,5 @@
 /* eslint-disable class-methods-use-this */
-function convertDate(value) {
-  const rValue = value < 10 ? `0${value}` : value;
-  return rValue;
-}
-
-function printData(valueDate) {
-  const itemDate = new Date(valueDate);
-  const date = convertDate(itemDate.getDate());
-  const month = convertDate(itemDate.getMonth() + 1);
-  const year = convertDate(itemDate.getFullYear());
-  const hours = convertDate(itemDate.getHours());
-  const minut = convertDate(itemDate.getMinutes());
-  const newItem = `${hours}:${minut} ${date}.${month}.${year}`;
-  return newItem;
-}
+import printData from './print-data.js';
 
 export default class Bot {
   constructor(parentEl) {

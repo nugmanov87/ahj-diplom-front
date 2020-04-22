@@ -1,6 +1,6 @@
 import Worker from './web-worker.js';
-import PrintMessage from './print-message.js';
-import Crypton from './crypt.js';
+import PrintMessage from './Print-message.js';
+import Crypt from './Crypt.js';
 
 const localArrMessages = [];
 const urls = 'ahj-diplom-server.herokuapp.com';
@@ -10,7 +10,7 @@ export default class TransferMessage {
     this.keyCrypt = crypton;
     this.urlWS = `wss://${urls}/ws`;
     this.url = `https://${urls}/`;
-    this.crypton = new Crypton(crypton);
+    this.crypton = new Crypt(crypton);
     this.lazyStart = true;
   }
 

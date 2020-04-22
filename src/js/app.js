@@ -1,8 +1,8 @@
-import TransferMessage from './transfer-message.js';
-import Popup from './popup.js';
-import RecAV from './rec-audio-video.js';
+import TransferMessage from './Transfer-message.js';
+import Popup from './Popup.js';
+import RecAV from './Rec-audio-video.js';
 import getGEO from './get-geolocation.js';
-import Bot from './bot-chat.js';
+import Bot from './Bot-chat.js';
 
 const uuid = require('uuid');
 
