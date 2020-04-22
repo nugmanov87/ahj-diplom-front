@@ -1,6 +1,6 @@
 import TransferMessage from './Transfer-message.js';
 import Popup from './Popup.js';
-import RecAV from './Rec-audio-video.js';
+import RecAV from './rec-audio-video.js';
 import getGEO from './get-geolocation.js';
 import Bot from './Bot-chat.js';
 
