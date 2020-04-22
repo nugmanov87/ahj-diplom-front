@@ -1,4 +1,4 @@
-import validateGEO from './validateGEO.js';
+import validateGEO from './get-geolocation.js';
 
 export default class Popup {
   init() {

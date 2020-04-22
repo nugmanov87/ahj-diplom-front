@@ -3,7 +3,7 @@ function callPopup(msg, popup) {
   popup.showPopup('get', title, msg);
 }
 
-export default function getGEO(popup) {
+function getGEO(popup) {
   console.log('getGEO');
   const popupInp = document.querySelector('.popup-inp');
   const popupCancel = document.querySelector('.popup-cancel');
@@ -46,3 +46,16 @@ export default function getGEO(popup) {
     }
   });
 }
+
+function validateGEO(coord) {
+  if (
+    coord.search(
+      /^(\[?-?)((\d|[0-8]\d?|90)\.\d{4,}), ?(-|−)?((\d|\d\d|1[0-7][0-9]|180)\.\d{4,})(\]?)$/,
+    ) !== -1
+  ) {
+    return true;
+  }
+  return false;
+}
+
+export { getGEO, validateGEO };
