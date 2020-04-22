@@ -4,7 +4,6 @@ function callPopup(msg, popup) {
 }
 
 export default function getGEO(popup) {
-  console.log('getGEO');
   const popupInp = document.querySelector('.popup-inp');
   const popupCancel = document.querySelector('.popup-cancel');
   const popupOk = document.querySelector('.popup-ok');
@@ -20,7 +19,7 @@ export default function getGEO(popup) {
           const msg = 'К сожалению, нам не удалось определить ваше местоположение, пожалуйста, дайте разрешение на использование геолокации, либо введите координаты вручную. Введите Широту и долготу через запятую (45.0000, 54.0000)';
           callPopup(msg, popup);
           popupOk.addEventListener('click', () => {
-            console.log('GEO ok', error);
+            popup.showPopup('GEO ok', error);
             if (popup.validate()) {
               resolve(popupInp.value);
             }
@@ -35,7 +34,7 @@ export default function getGEO(popup) {
       callPopup(msg, popup);
 
       popupOk.addEventListener('click', () => {
-        console.log('GEO ok');
+        popup.showPopup('GEO ok');
         if (popup.validate()) {
           resolve(popupInp.value);
         }

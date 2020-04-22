@@ -15,7 +15,6 @@ export default class Crypt {
       const retStr = bytes.toString(CryptoJS.enc.Utf8);
       return retStr;
     } catch (e) {
-      console.log(e);
       return null;
     }
   }

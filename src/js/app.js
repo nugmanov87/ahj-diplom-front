@@ -34,7 +34,6 @@ submitName.addEventListener('click', async () => {
 
 // **************** input file *********************
 function loadFile(file) {
-  console.log(file.name);
   const itemId = uuid.v4();
   const regExp = /[a-z]+/;
   const typeFile = file.type.match(regExp)[0];
@@ -167,7 +166,6 @@ const elGEO = document.querySelector('.geo-teg');
 elGEO.addEventListener('click', async () => {
   const GEOteg = await getGEO(popup);
   elPopup.classList.add('hidden');
-  console.log(GEOteg);
   const objMessage = {
     id: uuid.v4(),
     type: 'textMsg',

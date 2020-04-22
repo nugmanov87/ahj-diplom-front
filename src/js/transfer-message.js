@@ -25,9 +25,7 @@ export default class TransferMessage {
 
   initWS() {
     this.ws = new WebSocket(this.urlWS);
-    this.ws.addEventListener('open', () => {
-      console.log('connected');
-    });
+    this.ws.addEventListener('open', () => {});
 
     this.ws.addEventListener('message', (evt) => {
       const inpMsg = JSON.parse(evt.data);
@@ -49,14 +47,6 @@ export default class TransferMessage {
           .classList.remove('loaded');
       }
     });
-
-    this.ws.addEventListener('close', (evt) => {
-      console.log('connection closed', evt);
-    });
-
-    this.ws.addEventListener('error', () => {
-      console.log('error');
-    });
   }
 
   sendMessage(message) {
@@ -64,12 +54,7 @@ export default class TransferMessage {
     this.printMsg.printMsg(message, 'end');
 
     if (this.ws.readyState === WebSocket.OPEN) {
-      try {
-        this.uploadMsg(message);
-      } catch (e) {
-        console.log('err');
-        console.log(e);
-      }
+      this.uploadMsg(message);
     } else {
       this.ws = new WebSocket(this.urlWS);
       this.uploadMsg(message);
@@ -122,7 +107,9 @@ export default class TransferMessage {
   }
 
   changeFavorit(idElement, data) {
-    const itemIndex = localArrMessages.findIndex((item) => item.id === idElement);
+    const itemIndex = localArrMessages.findIndex(
+      (item) => item.id === idElement,
+    );
     localArrMessages[itemIndex].favorit = data;
 
     fetch(`${this.url}favorits`, {

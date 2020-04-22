@@ -106,9 +106,7 @@ export default class Bot {
   }
 
   randomMsg(arr) {
-    console.log(arr);
     const randomIndex = Math.floor(Math.random() * arr.length);
-    console.log(randomIndex);
     return arr[randomIndex];
   }
 }

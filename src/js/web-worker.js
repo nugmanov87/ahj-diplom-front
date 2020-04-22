@@ -14,12 +14,11 @@ function deCrypt(objMsg, crypton) {
     const retStr = bytes.toString(CryptoJS.enc.Utf8);
     return retStr;
   } catch (e) {
-    console.log(e);
     return null;
   }
 }
 
-self.addEventListener('message', async (event) => { // eslint-disable-line
+self.addEventListener("message", async (event) => {  // eslint-disable-line
   let content = '';
   if (event.data.workCrypt === 'enCrypt') {
     content = await enCrypt(event.data.file, event.data.keyCrypt);

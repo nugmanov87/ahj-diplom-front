@@ -73,13 +73,11 @@ export default class AVrec {
       const chunks = [];
 
       recorder.start();
-      // console.log(recorder.state);
 
       recorder.addEventListener('start', () => {
         timers = setInterval(() => {
           this.bPlayTimer.innerText = this.timer((timmm += 1));
         }, 1000);
-        console.log('recording started');
       });
 
       recorder.addEventListener('dataavailable', (evt) => {
@@ -96,8 +94,7 @@ export default class AVrec {
           }
           const itemId = uuid.v4();
           const element = document.createElement(curMedia);
-          console.log('recording stopped');
-          // const blob = new Blob(chunks, {type: 'audio/mpeg3'});
+
           const blob = new Blob(chunks, { type: `${curMedia}/mp4` });
 
           const fr = new FileReader();
@@ -141,7 +138,6 @@ export default class AVrec {
         SaveCancel = false;
       });
     } catch (e) {
-      // console.error(e);
       const title = 'Что-то пошло не так...';
       const msg = 'Дайте разрешение на запись звука/видео в браузере';
       // const msg = 'Запрошенное устройство не найдено!!!!';
