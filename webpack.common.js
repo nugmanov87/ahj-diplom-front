@@ -7,25 +7,28 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "app.bundle.js"
+    filename: "app.bundle.js",
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css"
+      filename: "[name].css",
     }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      filename: "./index.html"
+      filename: "./index.html",
     }),
     new CopyPlugin([
       {
         from: "./src/img/",
-        to: "img/"
-      }
-    ])
+        to: "img/",
+      },
+    ]),
   ],
   devServer: {
-    port: 8080
+    port: 8080,
+  },
+  resolve: {
+    extensions: [".js", ".ts"],
   },
   module: {
     rules: [
@@ -33,24 +36,24 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /web-worker\.js$/,
-        use: { loader: "worker-loader" }
+        use: { loader: "worker-loader" },
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
-          }
-        ]
+            loader: "html-loader",
+          },
+        ],
       },
       {
         test: /\.(png)$/,
@@ -59,11 +62,11 @@ module.exports = {
             loader: "file-loader",
             options: {
               esModule: false,
-              name: "img/[name].[ext]"
-            }
-          }
-        ]
-      }
-    ]
-  }
+              name: "img/[name].[ext]",
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
