@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js';
 
+
 function enCrypt(objMsg, crypton) {
   const itemMsg = objMsg;
   const cryptMsg = CryptoJS.AES.encrypt(itemMsg.msg, crypton).toString();
@@ -33,3 +34,5 @@ self.addEventListener("message", async (event) => {  // eslint-disable-line
     self.close(); // eslint-disable-line
   }
 });
+
+export { enCrypt, deCrypt };
