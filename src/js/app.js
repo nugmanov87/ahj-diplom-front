@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
-import TransferMessage from './Transfer-message.js';
+import TransferMessage from './transfer-message.js';
 import Popup from './popup.js';
-import RecAV from './Rec-audio-video.js';
+import RecAV from './rec-audio-video.js';
 import getGEO from './get-geolocation.js';
 import Bot from './bot-chat.js';
 
