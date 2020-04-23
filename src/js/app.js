@@ -1,9 +1,9 @@
 /* eslint-disable import/no-unresolved */
 import TransferMessage from './transfer-message.js';
 import Popup from './popup.js';
-import RecAV from './rec-audio-video.js';
+import RecAudioVideo from './rec-audio-video.js';
 import getGEO from './get-geolocation.js';
-import Bot from './bot-chat.js';
+import BotChat from './bot-chat.js';
 
 const uuid = require('uuid');
 
@@ -15,7 +15,7 @@ let transferMsg = {};
 const elWindowStart = document.querySelector('.window');
 const elLegends = document.querySelector('.legends');
 const submitName = document.querySelector('#submit-name');
-const funcBot = new Bot(document.querySelector('.display-legends'));
+const funcBot = new BotChat(document.querySelector('.display-legends'));
 
 submitName.addEventListener('click', async () => {
   const inputName = document.querySelector('#inp-name');
@@ -28,7 +28,7 @@ submitName.addEventListener('click', async () => {
   elLegends.classList.remove('hidden');
   elWindowStart.classList.add('hidden');
   // **************** rec AV *********************
-  const recorder = new RecAV(popup, transferMsg);
+  const recorder = new RecAudioVideo(popup, transferMsg);
   recorder.init();
   // **************** rec AV *********************
 });

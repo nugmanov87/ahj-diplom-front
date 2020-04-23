@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 const uuid = require('uuid');
 
-export default class AVrec {
+export default class RecAudioVideo {
   constructor(popup, transferMsg) {
     this.popup = popup;
     this.transferMsg = transferMsg;
@@ -40,7 +40,7 @@ export default class AVrec {
       return;
     }
     try {
-      let SaveCancel = true;
+      let saveCancel = true;
       let timmm = 0;
       let timers = null;
 
@@ -87,7 +87,7 @@ export default class AVrec {
       recorder.addEventListener('stop', async () => {
         clearInterval(timers);
         this.bPlayTimer.innerText = '00:00';
-        if (SaveCancel) {
+        if (saveCancel) {
           let curMedia = 'audio';
           if (tVideo) {
             curMedia = 'video';
@@ -128,14 +128,14 @@ export default class AVrec {
       this.bPlayOk.addEventListener('click', () => {
         recorder.stop();
         stream.getTracks().forEach((track) => track.stop());
-        SaveCancel = true;
+        saveCancel = true;
       });
 
       this.bPlayCancel.addEventListener('click', () => {
         recorder.stop();
         // clearInterval(timers);
         stream.getTracks().forEach((track) => track.stop());
-        SaveCancel = false;
+        saveCancel = false;
       });
     } catch (e) {
       const title = 'Что-то пошло не так...';

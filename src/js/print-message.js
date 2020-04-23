@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
-import printData from './print-data.js';
+import printTime from './print-time.js';
 
 export default class PrintMessage {
   constructor(parentEl, crypton) {
@@ -39,7 +39,7 @@ export default class PrintMessage {
     ${msgHtml}
     <div class="footer-msg">
       <div class="like av${messageObj.favorit ? ' favorit' : ''}"></div>
-      <div class="date-time">${printData(messageObj.dateTime)}</div>
+      <div class="date-time">${printTime(messageObj.dateTime)}</div>
     </div>
     `;
     if (insertPosition === 'end') {

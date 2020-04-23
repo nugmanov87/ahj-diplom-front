@@ -6,17 +6,17 @@ const localArrMessages = [];
 const urls = 'ahj-diplom-server.herokuapp.com';
 
 export default class TransferMessage {
-  constructor(crypton) {
-    this.keyCrypt = crypton;
+  constructor(crypt) {
+    this.keyCrypt = crypt;
     this.urlWS = `wss://${urls}/ws`;
     this.url = `https://${urls}/`;
-    this.crypton = new Crypt(crypton);
+    this.crypt = new Crypt(crypt);
     this.lazyStart = true;
   }
 
   async init() {
     this.elListMessages = document.querySelector('.display-legends');
-    this.printMsg = new PrintMessage(this.elListMessages, this.crypton);
+    this.printMsg = new PrintMessage(this.elListMessages, this.crypt);
     this.initWS();
     const resp = await fetch(`${this.url}initmsg`);
     await resp.text();
@@ -36,7 +36,7 @@ export default class TransferMessage {
         return;
       }
 
-      const deCrypt = this.crypton.deCrypt(inpMsg.msg);
+      const deCrypt = this.crypt.deCrypt(inpMsg.msg);
 
       if (deCrypt && deCrypt !== null) {
         inpMsg.msg = deCrypt;

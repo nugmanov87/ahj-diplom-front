@@ -1,7 +1,4 @@
-function callPopup(msg, popup) {
-  const title = 'Что-то пошло не так';
-  popup.showPopup('get', title, msg);
-}
+import callPopup from './call-popup.js';
 
 export default function getGEO(popup) {
   const popupInp = document.querySelector('.popup-inp');

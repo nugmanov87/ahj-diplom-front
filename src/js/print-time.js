@@ -1,4 +1,4 @@
-export default function printData(valueDate) {
+export default function printTime(valueDate) {
   function formatTime(value) {
     const rValue = value < 10 ? `0${value}` : value;
     return rValue;

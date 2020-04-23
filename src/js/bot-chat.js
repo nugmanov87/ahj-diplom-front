@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
-import printData from './print-data.js';
+import printTime from './print-time.js';
 
-export default class Bot {
+export default class BotChat {
   constructor(parentEl) {
     this.weather = [
       'За окном ливень и град!!!',
@@ -52,7 +52,7 @@ export default class Bot {
     itemMsg.innerHTML = `
     ${msg}
     <div class="footer-msg">
-      <div class="date-time">${printData(new Date())}</div>
+      <div class="date-time">${printTime(new Date())}</div>
     </div>
     `;
     this.parentEl.appendChild(itemMsg);
@@ -85,7 +85,7 @@ export default class Bot {
     itemMsg.innerHTML = `
     ${msgHtml}
     <div class="footer-msg">
-      <div class="date-time">${printData(new Date())}</div>
+      <div class="date-time">${printTime(new Date())}</div>
     </div>
     `;
     this.parentEl.appendChild(itemMsg);
