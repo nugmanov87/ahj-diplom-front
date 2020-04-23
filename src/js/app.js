@@ -1,4 +1,5 @@
-import TransferMessage from './transfer-message.js';
+/* eslint-disable import/no-unresolved */
+import TransferMessage from './Transfer-message.js';
 import Popup from './popup.js';
 import RecAV from './Rec-audio-video.js';
 import getGEO from './get-geolocation.js';

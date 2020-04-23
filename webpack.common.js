@@ -1,73 +1,69 @@
 const path = require("path"); // Node.js модуль для разрешения путей файлов
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // устанавливается через npm
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const Dotenv = require("dotenv-webpack");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "app.bundle.js",
+    filename: "app.bundle.js"
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: "[name].css"
     }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      filename: "./index.html",
-      // favicon: './src/favicon.ico',
+      filename: "./index.html"
     }),
-    new Dotenv(),
+    new CopyPlugin([
+      {
+        from: "./src/img/",
+        to: "img/"
+      }
+    ])
   ],
+  devServer: {
+    port: 8080
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
-          },
-        },
+          loader: "babel-loader"
+        }
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
-
+      {
+        test: /web-worker\.js$/,
+        use: { loader: "worker-loader" }
+      },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader",
-          },
-        ],
+            loader: "html-loader"
+          }
+        ]
       },
       {
-        test: /\.(png|jpg|gif)$/i,
+        test: /\.(png)$/,
         use: [
           {
-            loader: "url-loader",
+            loader: "file-loader",
             options: {
-              limit: 8192,
-            },
-          },
-        ],
-      },
-      // {
-      //   test: /\.(png)$/,
-      //   use: [
-      //     {
-      //       loader: 'file-loader',
-      //       options: {
-      //         esModule: false,
-      //         name: 'img/[name].[ext]',
-      //       },
-      //     },
-      //   ],
-      // },
-    ],
-  },
+              esModule: false,
+              name: "img/[name].[ext]"
+            }
+          }
+        ]
+      }
+    ]
+  }
 };
