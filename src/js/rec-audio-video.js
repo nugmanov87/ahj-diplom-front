@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+// eslint-disable-next-line import/no-extraneous-dependencies
 const uuid = require('uuid');
 
 export default class RecAudioVideo {
@@ -127,6 +128,7 @@ export default class RecAudioVideo {
 
       this.bPlayOk.addEventListener('click', () => {
         recorder.stop();
+        // eslint-disable-next-line arrow-parens
         stream.getTracks().forEach((track) => track.stop());
         saveCancel = true;
       });
@@ -134,6 +136,7 @@ export default class RecAudioVideo {
       this.bPlayCancel.addEventListener('click', () => {
         recorder.stop();
         // clearInterval(timers);
+        // eslint-disable-next-line arrow-parens
         stream.getTracks().forEach((track) => track.stop());
         saveCancel = false;
       });

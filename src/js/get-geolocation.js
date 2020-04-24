@@ -13,6 +13,7 @@ export default function getGEO(popup) {
           resolve(`${latitude}, ${longitude}`);
         },
         (error) => {
+          // eslint-disable-next-line max-len
           const msg = 'К сожалению, нам не удалось определить ваше местоположение, пожалуйста, дайте разрешение на использование геолокации, либо введите координаты вручную. Введите Широту и долготу через запятую (45.0000, 54.0000)';
           callPopup(msg, popup);
           popupOk.addEventListener('click', () => {

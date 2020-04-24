@@ -1,5 +1,5 @@
 import Worker from './web-worker.js';
-import PrintMessage from './print-message.js';
+import PrintMessage from './Print-message.js';
 import Crypt from './Crypt.js';
 
 const localArrMessages = [];
@@ -108,6 +108,7 @@ export default class TransferMessage {
 
   changeFavorit(idElement, data) {
     const itemIndex = localArrMessages.findIndex(
+      // eslint-disable-next-line arrow-parens
       (item) => item.id === idElement,
     );
     localArrMessages[itemIndex].favorit = data;

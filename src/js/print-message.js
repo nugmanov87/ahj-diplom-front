@@ -1,6 +1,8 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
+// eslint-disable-next-line import/no-unresolved
 import hljs from 'highlight.js';
+// eslint-disable-next-line import/no-unresolved
 import 'highlight.js/styles/github.css';
 import printTime from './print-time.js';
 

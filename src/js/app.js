@@ -1,10 +1,11 @@
 /* eslint-disable import/no-unresolved */
-import TransferMessage from './transfer-message.js';
-import Popup from './popup.js';
-import RecAudioVideo from './rec-audio-video.js';
+import TransferMessage from './Transfer-message.js';
+import Popup from './Popup.js';
+import RecAudioVideo from './Rec-audio-video.js';
 import getGEO from './get-geolocation.js';
-import BotChat from './bot-chat.js';
+import BotChat from './Bot-chat.js';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const uuid = require('uuid');
 
 const elAddFile = document.querySelector('.add-file');

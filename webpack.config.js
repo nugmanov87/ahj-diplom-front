@@ -1,29 +1,28 @@
-const path = require("path");
+const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: {
-    app: "./src/index.js",
+    app: './src/index.js',
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    open: true,
+    contentBase: './src',
   },
   output: {
-    filename: "[name].js",
-    path: path.resolve(__dirname, "./dist"),
-    publicPath: "/dist",
-  },
-  resolve: {
-    extensions: [".js", ".ts"],
+    filename: 'bunde.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: "babel-loader",
-        exclude: "/node_modules/",
-      },
-      {
         test: /\.(png|jpg|gif)$/i,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
               limit: 8192,
             },
@@ -31,9 +30,36 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader, 'css-loader',
+        ],
       },
     ],
   },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: './src/index.html',
+      filename: './index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
 };
