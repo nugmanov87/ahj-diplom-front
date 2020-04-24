@@ -1,6 +1,8 @@
 {
   "name": "ahj-diplom",
   "version": "1.0.0",
+  "private": true,
+  "homepage": "https://nugmanov87.github.io/ahj-diplom-front/",
   "description": "",
   "main": "index.js",
   "scripts": {
