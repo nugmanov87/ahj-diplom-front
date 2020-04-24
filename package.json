@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js",
+    "start": "webpack-dev-server --config webpack.config.js",
     "live": "live-server src",
     "test": "jest --testPathPattern=./src/test/",
     "e2e": "jest --testPathPattern=./src/e2e/",
     "lint": "eslint .",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.config.js"
   },
   "author": "",
   "license": "MIT",
@@ -48,6 +48,7 @@
     "core-js": "^3.6.4",
     "crypto-js": "^4.0.0",
     "highlight.js": "^9.18.1",
+    "style-loader": "^1.2.0",
     "uuid": "^7.0.2"
   }
 }
