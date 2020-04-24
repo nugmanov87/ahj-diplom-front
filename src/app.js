@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved */
+
 import TransferMessage from './js/Transfer-message.js';
 import Popup from './js/Popup.js';
 import RecAudioVideo from './js/Rec-audio-video.js';
