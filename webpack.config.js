@@ -9,6 +9,9 @@ module.exports = {
     path: path.resolve(__dirname, "./dist"),
     publicPath: "/dist",
   },
+  resolve: {
+    extensions: [".js", ".ts"],
+  },
   module: {
     rules: [
       {
