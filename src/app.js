@@ -1,9 +1,9 @@
 /* eslint-disable import/no-unresolved */
-import TransferMessage from './Transfer-message.js';
-import Popup from './Popup.js';
-import RecAudioVideo from './Rec-audio-video.js';
-import getGEO from './get-geolocation.js';
-import BotChat from './Bot-chat.js';
+import TransferMessage from './js/Transfer-message.js';
+import Popup from './js/Popup.js';
+import RecAudioVideo from './js/Rec-audio-video.js';
+import getGEO from './js/get-geolocation.js';
+import BotChat from './js/Bot-chat.js';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 const uuid = require('uuid');
