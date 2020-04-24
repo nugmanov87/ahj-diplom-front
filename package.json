@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://nugmanov87.github.io/ahj-diplom-front/",
   "description": "",
-  "main": "index.js",
+  "main": "Index.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.js",
     "live": "live-server src",
