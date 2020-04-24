@@ -12,34 +12,27 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
+        loader: "babel-loader",
+        exclude: "/node_modules/",
       },
       {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader",
-          },
-        ],
-      },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
-      {
-        test: /\.(png|jpg|gif|ico)$/i,
+        test: /\.(png|jpg|gif)$/i,
         use: [
           {
             loader: "file-loader",
             options: {
-              esModule: false,
               name: "[name].[ext]",
             },
           },
         ],
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.html$/i,
+        use: ["file-loader?name=[name].[ext]", "extract-loader", "html-loader"],
       },
     ],
   },
