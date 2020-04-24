@@ -1,6 +1,6 @@
 import Worker from './web-worker.js';
 import PrintMessage from './print-message.js';
-import Crypt from './crypt.js';
+import Crypt from './Crypt.js';
 
 const localArrMessages = [];
 const urls = 'ahj-diplom-server.herokuapp.com';
