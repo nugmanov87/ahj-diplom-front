@@ -1,5 +1,6 @@
 
-import TransferMessage from './js/Transfer-message.js';
+// eslint-disable-next-line import/extensions
+import TransferMessage from './js/Transfer-message';
 import Popup from './js/Popup.js';
 import RecAudioVideo from './js/Rec-audio-video.js';
 import getGEO from './js/get-geolocation.js';
