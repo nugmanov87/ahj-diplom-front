@@ -106,7 +106,10 @@ elSelectFile.addEventListener('click', (event) => {
   }
 });
 
-elFavorits.addEventListener('click', () => {
+// eslint-disable-next-line no-use-before-define
+elFavorits.addEventListener('click', showFavorits);
+
+function showFavorits() {
   if (elFavorits.classList.contains('favorit')) {
     elFavorits.classList.remove('favorit');
     elFavorits.innerHTML = '';
@@ -114,7 +117,7 @@ elFavorits.addEventListener('click', () => {
   }
   elFavorits.classList.add('favorit');
   elFavorits.innerHTML = '<style>.no-favorit, .inputs {display: none;}</style>';
-});
+}
 
 // **************** input text *********************
 const elInput = document.querySelector('#el-input');
