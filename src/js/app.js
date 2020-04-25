@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable import/no-unresolved */
 import TransferMessage from './TransferMessage.js';
 import PopupShow from './PopupShow.js';
@@ -5,20 +6,55 @@ import RecAudioVideo from './RecAudioVideo.js';
 import getGEO from './getGeolocation.js';
 import BotChat from './BotChat.js';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 const uuid = require('uuid');
 
-const elAddFile = document.querySelector('.add-file');
 const popup = new PopupShow();
 popup.init();
 
 let transferMsg = {};
 const elWindowStart = document.querySelector('.window');
 const elLegends = document.querySelector('.legends');
-const submitName = document.querySelector('#submit-name');
 const funcBot = new BotChat(document.querySelector('.display-legends'));
 
-submitName.addEventListener('click', async () => {
+const submitName = document.querySelector('#submit-name');
+submitName.addEventListener('click', recAudioVideo);
+
+const buttonSelectFile = document.querySelector('#button-select');
+buttonSelectFile.addEventListener('change', changeEvent);
+
+const elAddFile = document.querySelector('.add-file');
+elAddFile.addEventListener('click', addFile);
+
+const elSelectFile = document.querySelector('#drop-file');
+elSelectFile.addEventListener('dragover', (event) => {
+  event.preventDefault();
+});
+elSelectFile.addEventListener('drop', dragFile);
+elSelectFile.addEventListener('scroll', scrollingMessage);
+elSelectFile.addEventListener('click', addLike);
+
+const elFavorits = document.querySelector('#favorits');
+elFavorits.addEventListener('click', showFavorits);
+
+const elInput = document.querySelector('#el-input');
+elInput.addEventListener('keypress', sendText);
+
+const elPopupInput = document.querySelector('.popup-inp');
+const elPopup = document.querySelector('.popup');
+
+const elPopupCancel = document.querySelector('.popup-cancel');
+elPopupCancel.addEventListener('click', popupCancel);
+
+const elPopupOk = document.querySelector('.popup-ok');
+elPopupOk.addEventListener('click', popupOk);
+
+const elGEO = document.querySelector('.geo-teg');
+elGEO.addEventListener('click', geoLocation);
+
+const elExport = document.querySelector('#export-history');
+elExport.addEventListener('click', transferHistory);
+
+async function recAudioVideo() {
   const inputName = document.querySelector('#inp-name');
   const keyCrypt = inputName.value;
 
@@ -28,13 +64,10 @@ submitName.addEventListener('click', async () => {
   inputName.value = '';
   elLegends.classList.remove('hidden');
   elWindowStart.classList.add('hidden');
-  // **************** rec AV *********************
   const recorder = new RecAudioVideo(popup, transferMsg);
   recorder.init();
-  // **************** rec AV *********************
-});
+}
 
-// **************** input file *********************
 function loadFile(file) {
   const itemId = uuid.v4();
   const regExp = /[a-z]+/;
@@ -57,40 +90,31 @@ function loadFile(file) {
   };
 }
 
-// ***************************** add file ****************************
-const buttonSelectFile = document.querySelector('#button-select');
-const elSelectFile = document.querySelector('#drop-file');
-const elFavorits = document.querySelector('#favorits');
-
-elAddFile.addEventListener('click', () => {
+function addFile() {
   buttonSelectFile.value = null;
   buttonSelectFile.dispatchEvent(new MouseEvent('click'));
-});
+}
 
-elSelectFile.addEventListener('dragover', (event) => {
-  event.preventDefault();
-});
-
-elSelectFile.addEventListener('drop', (event) => {
+function dragFile(event) {
   event.preventDefault();
   const files = Array.from(event.dataTransfer.files);
   for (const item of files) {
     loadFile(item);
   }
-});
+}
 
-buttonSelectFile.addEventListener('change', (event) => {
+function changeEvent(event) {
   const files = Array.from(event.currentTarget.files);
   loadFile(files[0]);
-});
+}
 
-elSelectFile.addEventListener('scroll', (event) => {
+function scrollingMessage(event) {
   if (event.target.scrollTop === 0) {
     transferMsg.lazyLoad();
   }
-});
+}
 
-elSelectFile.addEventListener('click', (event) => {
+function addLike(event) {
   const itemEl = event.target;
   if (itemEl.classList.contains('like')) {
     const parentEl = itemEl.closest('.item-message');
@@ -104,10 +128,7 @@ elSelectFile.addEventListener('click', (event) => {
     parentEl.classList.remove('no-favorit');
     transferMsg.changeFavorit(parentEl.dataset.id, true);
   }
-});
-
-// eslint-disable-next-line no-use-before-define
-elFavorits.addEventListener('click', showFavorits);
+}
 
 function showFavorits() {
   if (elFavorits.classList.contains('favorit')) {
@@ -119,10 +140,7 @@ function showFavorits() {
   elFavorits.innerHTML = '<style>.no-favorit, .inputs {display: none;}</style>';
 }
 
-// **************** input text *********************
-const elInput = document.querySelector('#el-input');
-
-elInput.addEventListener('keypress', (evt) => {
+function sendText(evt) {
   if ((evt.keyCode === 13 || evt.keyCode === 10) && evt.ctrlKey === true) {
     evt.preventDefault();
 
@@ -144,31 +162,20 @@ elInput.addEventListener('keypress', (evt) => {
     transferMsg.sendMessage(objMessage);
     elInput.value = '';
   }
-});
+}
 
-// **************** rec AV *********************
-const elPopup = document.querySelector('.popup');
-const elPopupInput = document.querySelector('.popup-inp');
-const elPopupCancel = document.querySelector('.popup-cancel');
-const elPopupOk = document.querySelector('.popup-ok');
-
-// popup cancel
-elPopupCancel.addEventListener('click', () => {
+function popupCancel() {
   elPopup.classList.add('hidden');
   return false;
-});
+}
 
-// popup OK
-elPopupOk.addEventListener('click', () => {
+function popupOk() {
   if (elPopupInput.classList.contains('hidden')) {
     elPopup.classList.add('hidden');
   }
-});
+}
 
-// **************** GEO *********************
-const elGEO = document.querySelector('.geo-teg');
-
-elGEO.addEventListener('click', async () => {
+async function geoLocation() {
   const GEOteg = await getGEO(popup);
   elPopup.classList.add('hidden');
   const objMessage = {
@@ -180,11 +187,8 @@ elGEO.addEventListener('click', async () => {
     dateTime: new Date(),
   };
   transferMsg.sendMessage(objMessage);
-});
+}
 
-// **************** export *********************
-const elExport = document.querySelector('#export-history');
-
-elExport.addEventListener('click', async () => {
+async function transferHistory() {
   transferMsg.exportHistory();
-});
+}
