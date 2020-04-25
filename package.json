@@ -6,12 +6,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.js",
+    "start": "webpack-dev-server --config webpack.dev.js",
     "live": "live-server src",
     "test": "jest --testPathPattern=./src/test/",
     "e2e": "jest --testPathPattern=./src/e2e/",
     "lint": "eslint .",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.prod.js"
   },
   "author": "",
   "license": "MIT",
