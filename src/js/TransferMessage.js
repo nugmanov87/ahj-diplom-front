@@ -1,5 +1,5 @@
 import Worker from './web-worker.js';
-import PrintMessage from './Print-message.js';
+import PrintMessage from './PrintMessage.js';
 import Crypt from './Crypt.js';
 
 const localArrMessages = [];
