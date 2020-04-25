@@ -1,10 +1,9 @@
-
-// eslint-disable-next-line import/extensions
-import TransferMessage from './js/TransferMessage';
-import PopupShow from './js/PopupShow.js';
-import RecAudioVideo from './js/RecAudioVideo.js';
-import getGEO from './js/get-geolocation.js';
-import BotChat from './js/BotChat.js';
+/* eslint-disable import/no-unresolved */
+import TransferMessage from './TransferMessage.js';
+import PopupShow from './PopupShow.js';
+import RecAudioVideo from './RecAudioVideo.js';
+import getGEO from './getGeolocation.js';
+import BotChat from './BotChat.js';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 const uuid = require('uuid');

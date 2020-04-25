@@ -1,5 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import validateGEO from './get-geolocation.js';
+import validateGEO from './getGeolocation.js';
 
 export default class PopupShow {
   init() {

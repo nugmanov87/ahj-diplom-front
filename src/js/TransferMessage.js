@@ -1,4 +1,5 @@
-import Worker from './web-worker.js';
+// eslint-disable-next-line import/no-unresolved
+import Worker from './webWorker.js';
 import PrintMessage from './PrintMessage.js';
 import CryptKey from './CryptKey.js';
 
