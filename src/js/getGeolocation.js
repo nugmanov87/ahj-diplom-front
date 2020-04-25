@@ -6,7 +6,7 @@ import {
   okPopup,
   cancelPopup,
   popupShow,
-} from './config.js';
+} from './configGeolocation.js';
 
 export default function getGEO(popup) {
   return new Promise((resolve, reject) => {
