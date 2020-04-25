@@ -1,7 +1,7 @@
 
 // eslint-disable-next-line import/extensions
 import TransferMessage from './js/TransferMessage';
-import Popup from './js/Popup.js';
+import PopupShow from './js/PopupShow.js';
 import RecAudioVideo from './js/RecAudioVideo.js';
 import getGEO from './js/get-geolocation.js';
 import BotChat from './js/BotChat.js';
@@ -10,7 +10,7 @@ import BotChat from './js/BotChat.js';
 const uuid = require('uuid');
 
 const elAddFile = document.querySelector('.add-file');
-const popup = new Popup();
+const popup = new PopupShow();
 popup.init();
 
 let transferMsg = {};
