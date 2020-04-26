@@ -1,5 +1,14 @@
 /* eslint-disable class-methods-use-this */
-// eslint-disable-next-line import/no-extraneous-dependencies
+import {
+  bAudio,
+  bVideo,
+  bPlayCancel,
+  bPlayOk,
+  bPlayTimer,
+  elStartRec,
+  elStopRec,
+} from './configRecAudioVideo.js';
+
 const uuid = require('uuid');
 
 export default class RecAudioVideo {
@@ -9,24 +18,15 @@ export default class RecAudioVideo {
   }
 
   init() {
-    this.bAudio = document.querySelector('#audio');
-    this.bVideo = document.querySelector('#video');
-    this.bPlayOk = document.querySelector('#play-ok');
-    this.bPlayCancel = document.querySelector('#play-cancel');
-    this.bPlayTimer = document.querySelector('#timer');
-    this.elStartRec = document.querySelector('.start-rec');
-    this.elStopRec = document.querySelector('.stop-rec');
-    // const mVideo = document.querySelector('#video');
-
-    this.bAudio.addEventListener('click', () => {
-      this.elStartRec.classList.add('hidden');
-      this.elStopRec.classList.remove('hidden');
+    bAudio.addEventListener('click', () => {
+      elStartRec.classList.add('hidden');
+      elStopRec.classList.remove('hidden');
       this.audioRecorder();
     });
 
-    this.bVideo.addEventListener('click', () => {
-      this.elStartRec.classList.add('hidden');
-      this.elStopRec.classList.remove('hidden');
+    bVideo.addEventListener('click', () => {
+      elStartRec.classList.add('hidden');
+      elStopRec.classList.remove('hidden');
       this.audioRecorder(true);
     });
   }
@@ -36,8 +36,8 @@ export default class RecAudioVideo {
       const title = 'Что-то пошло не так';
       const msg = 'Браузер не поддерживает';
       this.popup.showPopup('', title, msg);
-      this.elStartRec.classList.add('hidden');
-      this.elStopRec.classList.add('hidden');
+      elStartRec.classList.add('hidden');
+      elStopRec.classList.add('hidden');
       return;
     }
     try {
@@ -49,8 +49,8 @@ export default class RecAudioVideo {
         const title = 'Что-то пошло не так';
         const msg = 'Дайте разрешение на запись звука в браузере';
         this.popup.showPopup('', title, msg);
-        this.elStopRec.classList.add('hidden');
-        this.elStartRec.classList.add('hidden');
+        elStopRec.classList.add('hidden');
+        elStartRec.classList.add('hidden');
         return;
       }
 
@@ -77,7 +77,7 @@ export default class RecAudioVideo {
 
       recorder.addEventListener('start', () => {
         timers = setInterval(() => {
-          this.bPlayTimer.innerText = this.timer((timmm += 1));
+          bPlayTimer.innerText = this.timer((timmm += 1));
         }, 1000);
       });
 
@@ -87,7 +87,7 @@ export default class RecAudioVideo {
 
       recorder.addEventListener('stop', async () => {
         clearInterval(timers);
-        this.bPlayTimer.innerText = '00:00';
+        bPlayTimer.innerText = '00:00';
         if (saveCancel) {
           let curMedia = 'audio';
           if (tVideo) {
@@ -122,18 +122,18 @@ export default class RecAudioVideo {
         if (tVideo) {
           document.body.removeChild(document.querySelector('.mini-video'));
         }
-        this.elStartRec.classList.remove('hidden');
-        this.elStopRec.classList.add('hidden');
+        elStartRec.classList.remove('hidden');
+        elStopRec.classList.add('hidden');
       });
 
-      this.bPlayOk.addEventListener('click', () => {
+      bPlayOk.addEventListener('click', () => {
         recorder.stop();
         // eslint-disable-next-line arrow-parens
         stream.getTracks().forEach((track) => track.stop());
         saveCancel = true;
       });
 
-      this.bPlayCancel.addEventListener('click', () => {
+      bPlayCancel.addEventListener('click', () => {
         recorder.stop();
         // clearInterval(timers);
         // eslint-disable-next-line arrow-parens
@@ -145,8 +145,8 @@ export default class RecAudioVideo {
       const msg = 'Дайте разрешение на запись звука/видео в браузере';
       // const msg = 'Запрошенное устройство не найдено!!!!';
       this.popup.showPopup('', title, msg);
-      this.elStopRec.classList.add('hidden');
-      this.elStartRec.classList.add('hidden');
+      elStopRec.classList.add('hidden');
+      elStartRec.classList.add('hidden');
     }
   }
 
